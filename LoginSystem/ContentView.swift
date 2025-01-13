@@ -2,7 +2,6 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 
-// 創建一個單例來存儲登入狀態和用戶數據
 class LoginManager: ObservableObject {
     static let shared = LoginManager()
     @Published var isLoggedIn = false
@@ -27,13 +26,11 @@ class LoginManager: ObservableObject {
         print("Current loginInfo: \(loginInfo)")
         
         let matchedUser = loginInfo.first { user in
-            // 根據截圖，密碼欄位名為 "password"
             guard let storedPassword = user["password"] as? String else {
                 print("Failed to get password from user data")
                 return false
             }
             
-            // 密碼比對（因為截圖顯示只有password欄位）
             let passwordMatch = password == storedPassword
             
             print("Comparing password - Input: \(password), Stored: \(storedPassword)")
@@ -64,7 +61,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     private func fetchLoginInfo() {
         let db = Firestore.firestore()
-        // 修改這裡的路徑，改為 account/admin
         db.collection("account").getDocuments { querySnapshot, err in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -94,7 +90,6 @@ struct ContentView: View {
                 Text("管理系統")
                     .font(.largeTitle)
                 if loginManager.isLoggedIn {
-                    // 登入成功後的畫面
                     VStack {
                         Text("登入成功！")
                             .font(.title)
@@ -115,7 +110,6 @@ struct ContentView: View {
                         .cornerRadius(8)
                     }
                 } else {
-                    // 登入表單
                     VStack(spacing: 15) {
                         HStack {
                             Text("帳號：")
