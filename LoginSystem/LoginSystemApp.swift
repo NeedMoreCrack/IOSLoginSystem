@@ -1,7 +1,8 @@
 import SwiftUI
 
 @main
-struct LoginSystemApp: App {
+struct MyApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()
