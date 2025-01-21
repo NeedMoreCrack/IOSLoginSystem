@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 
+//帳號：admin
+//密碼：123456
 class LoginManager: ObservableObject {
     static let shared = LoginManager()
     @Published var isLoggedIn = false
